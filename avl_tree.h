@@ -17,17 +17,19 @@ Autores:
 typedef struct node NODE;
 typedef struct avl_tree AVL_TREE;
 
-CIRCULAR_LIST *create_avl_tree(); //Create a avl tree
+//functions that modify the avl tree
+AVL_TREE *create_avl_tree(); //Create a avl tree
 
+/*
+void insert_avl_tree(AVL_TREE *avl_tree, GAME *game);
+void remove_avl_tree(AVL_TREE *avl_tree, int key);
+void removeAll_avl_tree(AVL_TREE *avl_tree);
 
-int insert_list(CIRCULAR_LIST *game_circular_list, GAME game); //Insert in last position of circular list
-void print_node_list(NODE *node); //Print node
-void printAll_list(CIRCULAR_LIST *game_circular_list); //Print all nodes
-int search_position_list(CIRCULAR_LIST *game_circular_list, int position); //Search position with number
-int search_list(CIRCULAR_LIST *game_circular_list, GAME game, char option[2]); //search in circular list by company and year
-int duplicate_node(CIRCULAR_LIST *game_circular_list); //remove duplicate nodes
-int remove_list(CIRCULAR_LIST *game_circular_list, NODE *node); //Remove one position of circular list
-void removeAll_list(CIRCULAR_LIST *game_circular_list);//Remove all positions of circular list
-int move_list(CIRCULAR_LIST *game_circular_list, int position, int number, char option[2]); //move node to right or left
+//auxiliary function 
+void pre_ordem_avl_tree(AVL_TREE *avl_tree);
+void in_ordem_avl_tree(AVL_TREE *avl_tree);
+void post_ordem_avl_tree(AVL_TREE *avl_tree);
+void print_avl_tree(AVL_TREE *avl_tree);
+*/
 
 #endif //AVL_TREE_H

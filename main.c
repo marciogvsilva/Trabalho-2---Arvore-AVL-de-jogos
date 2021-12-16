@@ -11,44 +11,32 @@ Autores:
 #include "game.h"
 #include "avl_tree.h"
 
-int main(int argc, char const *argv[]){
+int main(){
     AVL_TREE *avl_tree = create_avl_tree();
 
-    insert(game_circular_list);
+    play_game();
 
-    int position, number;
-    char option[2];
+    char year[3];
+    char option[3];
+    
+    scanf("%s", option);
     do{
-        scanf("%c", option);
-        if(strcmp(option, "r") == 0) duplicate_node(game_circular_list);
-        
-        else if(strcmp(option, "p") == 0){ //review
-            GAME game;
-            scanf("%s", game.company);
-            search_list(game_circular_list, game, option);
-        }
-        
-        else if(strcmp(option, "a") == 0){ //review
-            GAME game;
-            scanf("%d", &game.year);
-            search_list(game_circular_list, game, option);
-        }
-        
-        else if(strcmp(option, "i") == 0) printAll_list(game_circular_list);
-        
-        else if(strcmp(option, "u") == 0){
-            scanf("%d", &position);
-            search_position_list(game_circular_list, position);
-        }
-        
-        else if(strcmp(option, "mr") == 0 || strcmp(option, "ml") == 0){ //review
-            scanf("%d %d", &position, &number);
-            move_list(game_circular_list, position, number, option);
-        }
-    }while(strcmp(option, "F") != 0);
+        scanf("%s", year); //review
+    }while(strcmp(year, "F") != 0);
+    
+    if(strcmp(option, "1") == 0) return 0;
 
-    //imprimir arvore e desalocar toda memoria alocada dinamicamente
+    /*
+    if(strcmp(option, "1") == 0) pre_ordem_avl_tree(avl_tree);
+        
+    else if(strcmp(option, "2") == 0) in_ordem_avl_tree(avl_tree);
+        
+    else post_ordem_avl_tree(avl_tree);
 
-    //removeAll_list(game_circular_list); //review
+    print_avl_tree(avl_tree);
+    
+    removeAll_avl_tree(avl_tree);*/
+    free(avl_tree);
+
     return 0;
 }

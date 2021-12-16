@@ -1,4 +1,4 @@
-UTIL=master.c circular_list.c
+UTIL=game.c avl_tree.c
 MAIN=main.c
 BINARY=main
 
