@@ -17,19 +17,15 @@ Autores:
 typedef struct node NODE;
 typedef struct avl_tree AVL_TREE;
 
-//functions that modify the avl tree
-AVL_TREE *create_avl_tree(); //Create a avl tree
-
+//extern functions
+AVL_TREE *create_avl_tree(); //create a avl tree
+void insert_avl_tree(AVL_TREE *avl_tree, GAME *game); //insert in avl tree node by node and balance
+void pre_ordem_avl_tree(AVL_TREE *avl_tree); //print avl tree in pre-ordem format
+void in_ordem_avl_tree(AVL_TREE *avl_tree); //print avl tree in in-ordem format
+void post_ordem_avl_tree(AVL_TREE *avl_tree); //print avl tree in post-ordem format
 /*
-void insert_avl_tree(AVL_TREE *avl_tree, GAME *game);
-void remove_avl_tree(AVL_TREE *avl_tree, int key);
-void removeAll_avl_tree(AVL_TREE *avl_tree);
-
-//auxiliary function 
-void pre_ordem_avl_tree(AVL_TREE *avl_tree);
-void in_ordem_avl_tree(AVL_TREE *avl_tree);
-void post_ordem_avl_tree(AVL_TREE *avl_tree);
-void print_avl_tree(AVL_TREE *avl_tree);
+void remove_avl_tree(AVL_TREE *avl_tree, int key); //remove a node of avl tree and balance
+void removeAll_avl_tree(AVL_TREE *avl_tree); //remove all nodes of avl three
 */
 
 #endif //AVL_TREE_H

@@ -9,7 +9,6 @@ Autores:
 #include <stdlib.h>
 #include <string.h>
 #include "game.h"
-#include "avl_tree.h"
 
 struct game{
     char name[50];
@@ -22,18 +21,10 @@ GAME *create_game(){
     return game;
 }
 
-void play_game(){
+GAME *play_game(FILE *file){
     GAME *game = create_game();
-    FILE *file = fopen("CSV.csv","r");
-
-    fseek(file, 3, SEEK_SET); //disregarding the 3 bytes of UTF-8
-    
-    while(!feof(file)){
-        fscanf(file, "%[^;]; %d; %[^(\r|\n)]", game->name, &game->year, game->company);
-        //insert_avl_tree(avl_tree, game);
-    }
-
-    fclose(file);
+    fscanf(file, "%[^;]; %d; %[^(\r|\n)]", game->name, &game->year, game->company);
+    return game;
 }
 
 void print_game(GAME *game){
