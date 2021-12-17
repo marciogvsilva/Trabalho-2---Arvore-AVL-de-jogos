@@ -10,9 +10,9 @@ Autores:
 
 typedef struct game GAME;
 
-GAME *create_game();
-void play_game();
-void print_game(GAME *game);
+GAME *create_game(); //create game for insertion
+GAME *play_game(FILE *file); //read the file line and return game
+void print_game(GAME *game); //print game
 /*
 boolean item_apagar(ITEM **item);
 void item_imprimir(const ITEM *item);
