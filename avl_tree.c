@@ -12,13 +12,13 @@ Autores:
 #include "avl_tree.h"
 
 //intern functions
-NODE *create_node(); //create node for avl tree
-int heigth_node(NODE *node);
-int balancing_factor(NODE *node);
-void rotation_left(NODE *node);
-void rotation_right(NODE *node);
-void rotation_right_left(NODE *node);
-void rotation_left_right(NODE *node);
+static NODE *create_node(); //create node for avl tree
+static int heigth_node(NODE *node); //returns heigth of node
+static int balancing_factor(NODE *node); //return balancing factor of node
+static void rotation_left(NODE *node); //make the rotation left
+static void rotation_right(NODE *node); //make the rotation right
+static void rotation_right_left(NODE *node); //make the rotation right, then another left
+static void rotation_left_right(NODE *node); //make the rotation left, then another rifht
 
 struct node{
     GAME *game;
@@ -44,6 +44,29 @@ NODE *create_node(){
 }
 
 //insertion functions
+static int insert_auxiliar(NODE *root, GAME *game){
+    NODE *aux = root;
+    if(get_year_game(aux->game) < get_year_game(game)){
+        if(insert_auxiliar(aux->node_left, game)){
+            if(balancing_factor(aux) > 1){
+                if(get_year_game(aux->game) < get_year_game(aux->node_left->game)) rotation_right(aux);
+                else rotation_left_right(aux);
+            }
+        }
+    }else if(get_year_game(aux->game) > get_year_game(game)){
+        if(insert_auxiliar(aux->node_right, game)){
+            if(balancing_factor(aux) > 1){
+                if(get_year_game(aux->game) > get_year_game(aux->node_left->game)) rotation_left(aux);
+                else rotation_right_left(aux);
+            }
+        }
+    }else return FALSE;
+
+    aux->height = max(heigth_node(aux->node_left), heigth_node(aux->node_right)) + 1;
+
+    return TRUE;
+}
+
 void insert_avl_tree(AVL_TREE *avl_tree, GAME *game){
     if(!avl_tree || !game) return; //return if avl tree or game arent exists
 
@@ -51,23 +74,21 @@ void insert_avl_tree(AVL_TREE *avl_tree, GAME *game){
         avl_tree->root = create_node();
         avl_tree->root->game = game;
         avl_tree->root->height = heigth_node(avl_tree->root);
-        printf("insert in root sucessfuly");
+        printf("insert in root sucessfuly\n");
         return;
-    }
+    } else insert_auxiliar(avl_tree->root, game);
 
     //avl_tree->depth = update_depth_avl_tree();
 }
 
-//auxiliar insertion functions
-
-/*
 //removal functions
-void remove_avl_tree(AVL_TREE *avl_tree, int key){}
+void remove_avl_tree(AVL_TREE *avl_tree, int year){
+    if(!avl_tree || !avl_tree->root) return; //return if avl tree or game arent exists
+
+    if()
+}
 
 void removeAll_avl_tree(AVL_TREE *avl_tree){}
-
-//auxiliar removal functions
-*/
 
 //print functions
 void in_order(NODE *node){
@@ -95,18 +116,43 @@ void post_order(NODE *node){
 }
 
 //auxiliar function
-int heigth_node(NODE *node){
+static int heigth_node(NODE *node){
     if(node == NULL) return -1;
     return node->height;
 }
 
-int balancing_factor(NODE *node){
+static int balancing_factor(NODE *node){
     return labs((heigth_node(node->node_left)) - (heigth_node(node->node_right)));
 }
 
-/*
-void rotation_left(NODE *node){}
-void rotation_right(NODE *node){}
-void rotation_right_left(NODE *node){}
-void rotation_left_right(NODE *node){}
-*/
+static void rotation_right(NODE *node){//LL
+    NODE *aux = node->node_left;
+    node->node_left = aux->node_right;
+    aux->node_right = node;
+
+    node->height = max(heigth_node(node->node_left), heigth_node(node->node_right)) +1;
+    aux->height = max(heigth_node(aux->node_left), heigth_node(aux->node_right)) +1;
+
+    node = aux;
+}
+
+static void rotation_left(NODE *node){//RR
+    NODE *aux = node->node_right;
+    node->node_right = node->node_left;
+    aux->node_left = node;
+
+    node->height = max(heigth_node(node->node_left), heigth_node(node->node_right)) +1;
+    aux->height = max(heigth_node(aux->node_left), heigth_node(aux->node_right)) +1;
+
+    node = aux;
+}
+
+static void rotation_left_right(NODE *node){
+    rotation_left(node->node_left);
+    rotation_right(node);
+}
+
+static void rotation_right_left(NODE *node){
+    rotation_right(node->node_right);
+    rotation_left(node);
+}

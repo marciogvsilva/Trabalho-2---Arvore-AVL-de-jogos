@@ -30,3 +30,8 @@ GAME *play_game(FILE *file){
 void print_game(GAME *game){
     printf("%s\n", game->name);
 }
+
+int get_year_game(GAME *game){
+    if(game != NULL) return game->year;
+    return FALSE;
+}

@@ -12,7 +12,7 @@ Autores:
 #include "avl_tree.h"
 
 int main(){
-    char year[4];
+    char year_char[4];
     char option[3];
 
     AVL_TREE *avl_tree = create_avl_tree();
@@ -29,9 +29,14 @@ int main(){
     fclose(file);
 
     scanf("%s", option);
-    do{
-        scanf("%s", year); //review
-    }while(strcmp(year, "F") != 0);
+    while(1){
+        scanf("%s", year_char); //review
+        if(strcmp(year, "F") == 0) break;
+        else {
+            int year_int = atoi(year);
+            remove_avl_tree(avl_tree, year_int);
+        }
+    }
     
     if(strcmp(option, "1") == 0) return 0; //tests
 
