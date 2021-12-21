@@ -82,13 +82,28 @@ void insert_avl_tree(AVL_TREE *avl_tree, GAME *game){
 }
 
 //removal functions
-void remove_avl_tree(AVL_TREE *avl_tree, int year){
+/*void remove_avl_tree(AVL_TREE *avl_tree, int year){
     if(!avl_tree || !avl_tree->root) return; //return if avl tree or game arent exists
 
-    if()
+    NODE *aux = root;
+    if(get_year_game(aux->game) < get_year_game(game)){
+        if(remove_avl_tree(aux->node_left, year)){
+            if(balancing_factor(aux) > 1){
+                if(get_year_game(aux->game) < get_year_game(aux->node_left->game)) rotation_right(aux);
+                else rotation_left_right(aux);
+            }
+        }
+    }else if(get_year_game(aux->game) > get_year_game(game)){
+        if(remove_avl_tree(aux->node_right, game)){
+            if(balancing_factor(aux) > 1){
+                if(get_year_game(aux->game) > get_year_game(aux->node_left->game)) rotation_left(aux);
+                else rotation_right_left(aux);
+            }
+        }
+    }else return FALSE;
 }
 
-void removeAll_avl_tree(AVL_TREE *avl_tree){}
+void removeAll_avl_tree(AVL_TREE *avl_tree){}*/
 
 //print functions
 void in_order(NODE *node){
